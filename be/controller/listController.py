@@ -1,6 +1,5 @@
 from flask import Blueprint
-from bson import ObjectId  # For ObjectId to work
-from bson.json_util import dumps
+from be.service import listService
 
 list_blueprint = Blueprint("list_blueprint", __name__)
 
@@ -13,8 +12,4 @@ def test():
 @list_blueprint.route("/list", methods=["GET"])
 def getTodoList():
 
-    todo_cursor = collection.find()
-    todo_list = list(todo_cursor)
-    todo_json = dumps(todo_list)
-
-    return todo_json
+    return listService.getTodoList()
