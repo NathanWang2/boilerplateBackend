@@ -1,4 +1,4 @@
-from flask import Blueprint
+from flask import Blueprint, request
 from be.service import listService
 
 list_blueprint = Blueprint("list_blueprint", __name__)
@@ -13,3 +13,8 @@ def test():
 def getTodoList():
 
     return listService.getTodoList()
+
+
+@list_blueprint.route("/addItem", methods=["POST"])
+def addNewItem():
+    return listService.addNewItem(request)
