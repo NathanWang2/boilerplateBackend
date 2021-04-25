@@ -13,7 +13,10 @@ class TodoTask:
         return self.item.Title
 
     def getTaskObject(self):
-        return self.item
+        if self.item["id"] is None:
+            temp = self.item
+            temp.pop("id")
+        return temp
 
     def setTitle(self, updateTitle: str):
         self.item.title = updateTitle

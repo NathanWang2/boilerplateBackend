@@ -33,3 +33,17 @@ def addNewItem(req):
         # Usually never want to do this, this is more for me to debug
         print("Error: ", e)
         return "401"
+
+
+def removeSingleTask(taskId):
+
+    try:
+        del_response = todoList.delete_one({"_id": ObjectId(taskId)})
+
+        if del_response.deleted_count == 1:
+            return "204"
+        else:
+            return "404 Did not delete"
+    except:
+        return "404"
+    pass

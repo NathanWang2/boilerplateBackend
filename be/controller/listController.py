@@ -18,3 +18,8 @@ def getTodoList():
 @list_blueprint.route("/addItem", methods=["POST"])
 def addNewItem():
     return listService.addNewItem(request)
+
+
+@list_blueprint.route("/removeTask/<taskId>", methods=["DELETE"])
+def removeSingleTask(taskId):
+    return listService.removeSingleTask(taskId)
