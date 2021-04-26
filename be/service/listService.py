@@ -47,3 +47,31 @@ def removeSingleTask(taskId):
     except:
         return "404"
     pass
+
+
+def updateTask(req):
+    # You could verify that it is the right _id/exists in the db.
+    # For this I would need get_one for for that.
+
+    updated_task = TodoTask()
+
+    try:
+        data = req.get_json()
+        title = data['Title']
+        _id = data["_id"]["$oid"]
+
+        updated_task.setTitle(title)
+        updated_task.setId(ObjectId(_id))
+
+        # If you want to know, there are a lot of diff ways to handle updates.
+        # You could either return false or write the doc yourself. etc.
+        todoList.find_one_and_update({"_id": updated_task.getId()},
+                                     {"$set":
+                                      updated_task.getTaskObject()
+                                      }, upsert=True)
+
+        return "200"
+
+    except Exception as e:
+        print("Error: ", e)
+        return "Fail 404"
