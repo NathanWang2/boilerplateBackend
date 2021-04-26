@@ -1,22 +1,27 @@
 class TodoTask:
 
-    def __init__(self, title: str, id=None):
+    def __init__(self, title: str = None, _id=None):
         self.item = {
-            "id": id,
+            "_id": _id,
             "Title": title
         }
 
     def getId(self):
-        return self.item.id
+        return self.item["_id"]
 
     def getTitle(self):
-        return self.item.Title
+        return self.item["Title"]
 
     def getTaskObject(self):
-        if self.item["id"] is None:
+        if self.item["_id"] is None:
             temp = self.item
-            temp.pop("id")
-        return temp
+            temp.pop("_id")
+            return temp
+        else:
+            return self.item
 
     def setTitle(self, updateTitle: str):
-        self.item.title = updateTitle
+        self.item["Title"] = updateTitle
+
+    def setId(self, _id):
+        self.item["_id"] = _id
